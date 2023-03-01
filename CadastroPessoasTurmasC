@@ -1,0 +1,11 @@
+public class CadastroPessoasTurmasC {
+    
+    public static void main(String[] args) {
+     Array.inserir(new Pessoas("Vinicius",18));
+     Array.inserir(new Pessoas("Samara",18));
+     
+     
+     Array.mostrar();
+     
+    }
+}
