@@ -1,11 +1,25 @@
 public class CadastroPessoasTurmasC {
     
     public static void main(String[] args) {
-     Array.inserir(new Pessoas("Vinicius",18));
-     Array.inserir(new Pessoas("Samara",18));
-     
-     
-     Array.mostrar();
-     
+        Array.inserir(new Pessoas("Gerson", 35));
+        Array.inserir(new Pessoas("Samara", 30));
+        Array.inserir(new Pessoas("Anna", 90));
+        Array.inserir(new Pessoas("José", 100));
+        Array.inserir(new Pessoas("Gaia", 100));
+        Array.inserir(new Pessoas("Mel", 100));
+        Array.inserir(new Pessoas("Tutu", 100));
+        Array.inserir(new Pessoas("Mumu", 100));
+        Array.inserir(new Pessoas("Ronda", 100)); 
+        Array.mostrar();
+        System.out.println("=== Removendo... ===");
+        int id=9;
+        if(Array.remover(id)){
+            System.out.println(id+" removido com sucesso!");
+        }else{
+            System.out.println("Não foi possível remover!");
+        }
+        Array.mostrar();
     }
+
 }
+
