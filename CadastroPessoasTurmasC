@@ -19,6 +19,7 @@ public class CadastroPessoasTurmasC {
             System.out.println("Não foi possível remover!");
         }
         Array.mostrar();
+        Array.oredenar();
     }
 
 }
