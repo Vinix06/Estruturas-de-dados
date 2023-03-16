@@ -58,3 +58,63 @@ public class Livro {
         return "Livro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", preco=" + preco + "]";
     }
 }
+
+
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Biblioteca {
+    private Livro[] livros;
+    private int quantidadeLivros;
+
+    public Biblioteca(int tamanho) {
+        this.livros = new Livro[tamanho];
+        this.quantidadeLivros = 0;
+    }
+
+    public void adicionarLivro(Livro livro) {
+        if (quantidadeLivros == livros.length) {
+            livros = Arrays.copyOf(livros, livros.length * 2);
+        }
+
+        livros[quantidadeLivros++] = livro;
+    }
+
+    public void removerLivroPorId(int id) {
+        for (int i = 0; i < quantidadeLivros; i++) {
+            if (livros[i].getId() == id) {
+                livros[i] = null;
+                for (int j = i; j < quantidadeLivros - 1; j++) {
+                    livros[j] = livros[j + 1];
+                }
+                livros[--quantidadeLivros] = null;
+                break;
+            }
+        }
+    }
+
+    public void ordenarLivrosPorTitulo() {
+        Arrays.sort(livros, 0, quantidadeLivros, (a, b) -> a.getTitulo().compareTo(b.getTitulo()));
+    }
+
+    public Livro buscarLivroPorTitulo(String titulo) {
+        int inicio = 0;
+        int fim = quantidadeLivros - 1;
+
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+            if (livros[meio].getTitulo().equals(titulo)) {
+                return livros[meio];
+            } else if (livros[meio].getTitulo().compareTo(titulo) < 0) {
+                inicio = meio + 1;
+            } else {
+                fim = meio - 1;
+            }
+        }
+
+        return null;
+    }
+
+
