@@ -1,20 +1,22 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Livro {
+
     private int id;
     private String autor;
     private String titulo;
     private double preco;
 
-    public Livro() {
-        this.id = gerarIdAleatorio();
-        this.autor = "";
-        this.titulo = "";
-        this.preco = 0.0;
+    public Livro(String autor, String titulo, double preco) {
+        this.id = gerarId();
+        this.autor = autor;
+        this.titulo = titulo;
+        this.preco = preco;
     }
 
-    public Livro(String autor, String titulo, double preco) {
-        this.id = gerarIdAleatorio();
+    public Livro(int id, String autor, String titulo, double preco) {
+        this.id = id;
         this.autor = autor;
         this.titulo = titulo;
         this.preco = preco;
@@ -48,73 +50,54 @@ public class Livro {
         this.preco = preco;
     }
 
-    private int gerarIdAleatorio() {
-        Random random = new Random();
-        return random.nextInt(10000);
-    }
-
     @Override
     public String toString() {
-        return "Livro [id=" + id + ", autor=" + autor + ", titulo=" + titulo + ", preco=" + preco + "]";
-    }
-}
-
-
-
-
-import java.util.Arrays;
-import java.util.Scanner;
-
-public class Biblioteca {
-    private Livro[] livros;
-    private int quantidadeLivros;
-
-    public Biblioteca(int tamanho) {
-        this.livros = new Livro[tamanho];
-        this.quantidadeLivros = 0;
+        return "Livro{" +
+                "id=" + id +
+                ", autor='" + autor + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", preco=" + preco +
+                '}';
     }
 
-    public void adicionarLivro(Livro livro) {
-        if (quantidadeLivros == livros.length) {
-            livros = Arrays.copyOf(livros, livros.length * 2);
-        }
-
-        livros[quantidadeLivros++] = livro;
+    private int gerarId() {
+        Random random = new Random();
+        return random.nextInt(1000);
     }
 
-    public void removerLivroPorId(int id) {
-        for (int i = 0; i < quantidadeLivros; i++) {
+    public static void ordenarLivros(Livro[] livros) {
+        Arrays.sort(livros, (livro1, livro2) -> livro1.getTitulo().compareTo(livro2.getTitulo()));
+    }
+
+    public static void inserirLivro(Livro livro, Livro[] livros) {
+        Livro[] novoArrayLivros = Arrays.copyOf(livros, livros.length + 1);
+        novoArrayLivros[novoArrayLivros.length - 1] = livro;
+        livros = novoArrayLivros;
+        System.out.println("Livro adicionado com sucesso!");
+    }
+
+    public static void removerLivroPorId(int id, Livro[] livros) {
+        for (int i = 0; i < livros.length; i++) {
             if (livros[i].getId() == id) {
-                livros[i] = null;
-                for (int j = i; j < quantidadeLivros - 1; j++) {
+                for (int j = i; j < livros.length - 1; j++) {
                     livros[j] = livros[j + 1];
                 }
-                livros[--quantidadeLivros] = null;
-                break;
+                livros = Arrays.copyOf(livros, livros.length - 1);
+                System.out.println("Livro removido com sucesso!");
+                return;
             }
         }
+        System.out.println("Livro não encontrado!");
     }
 
-    public void ordenarLivrosPorTitulo() {
-        Arrays.sort(livros, 0, quantidadeLivros, (a, b) -> a.getTitulo().compareTo(b.getTitulo()));
-    }
-
-    public Livro buscarLivroPorTitulo(String titulo) {
-        int inicio = 0;
-        int fim = quantidadeLivros - 1;
-
-        while (inicio <= fim) {
-            int meio = (inicio + fim) / 2;
-            if (livros[meio].getTitulo().equals(titulo)) {
-                return livros[meio];
-            } else if (livros[meio].getTitulo().compareTo(titulo) < 0) {
-                inicio = meio + 1;
-            } else {
-                fim = meio - 1;
-            }
+    public static Livro buscarLivroPorTitulo(String titulo, Livro[] livros) {
+        int indice = Arrays.binarySearch(livros, new Livro(0, "", titulo, 0), (livro1, livro2) -> livro1.getTitulo().compareTo(livro2.getTitulo()));
+        if (indice < 0) {
+            System.out.println("Livro não encontrado!");
+            return null;
         }
-
-        return null;
+        return livros[indice];
     }
+}
 
 
