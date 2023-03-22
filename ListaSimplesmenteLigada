@@ -1,0 +1,9 @@
+public class ListaSimplesmenteLigada {
+    
+    public static void main(String[] args) {
+        Lista lista=new Lista();
+        lista.inserir(new Contato("Vinicius", "89551646"));
+    }
+    
+        
+    }
