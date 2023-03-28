@@ -5,10 +5,10 @@ public class Contato {
         
 
           
-   public Contato(String nome, String cel, int id) {
+   public Contato(String nome, String cel) {
         this.nome = nome;
         this.cel = cel;
-        this.id = id;
+        
     }
 
     public String getNome() {
