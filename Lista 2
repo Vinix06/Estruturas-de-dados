@@ -17,6 +17,33 @@ public class Lista {
       }
     }
     
+    /**
+     * Inserir um elemento na lista duplamnete ligada, co
+     * base na posicao, A posicao sera entre o inicio e o fim
+     * lista.
+     * @param object Object
+     * @param posicao int 
+     */
+    public void inserir(Object object, int posicao){
+    if(posicao>0 && posicao<contar()){
+        Elemento e=inicio, novo;
+        for(int i=1;i<posicao;i++){
+         e=e.getProx();
+        
+    
+        }
+       novo=new Elemento(object,e.getProx(), e);
+       e.getProx().setAnt(novo);
+       e.setProx(novo);
+    }else{
+        throw new IllegalArgumentException("");
+    }
+        
+        
+    } 
+    
+    
+    
     public void exibir(){
      Elemento e=inicio;
      while(e!=null){
@@ -59,7 +86,7 @@ public class Lista {
       }
     }
     
-    public int tamanho(){
+    public int contar(){
      Elemento e=inicio;
      int cont=0;
         while (e != null) {
