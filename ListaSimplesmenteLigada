@@ -1,9 +1,28 @@
-public class ListaSimplesmenteLigada {
-    
+public class UsaListaSimples{
+ 
     public static void main(String[] args) {
-        Lista lista=new Lista();
-        lista.inserir(new Contato("Vinicius", "89551646"));
-    }
-    
+      Lista lista=new Lista();
+      lista.inserir(new Contato("Gerson", "1234-55543"));
+      lista.inserir(new Contato("Sandra", "4321-78546"));
+      lista.inserir(new Contato("Anna", "6543-98768"));
+      lista.inserir(new Contato("Mel", "4943-03932"));
+      try{
+      lista.inserir(new Contato("XOROPADA","00000"),0);
+      }catch(IllegalArgumentException e){
+          System.out.println(e.getMessage());
+      }
+//lista.exibir();
+//      Elemento e=lista.buscar(5);
+//      if(e!=null){
+//          System.out.println(e.getObjeto());
+//      }else{
+//          System.out.println("Não achou!!");
+//      }
         
+//       lista.remover(1);
+//       lista.exibir();
+
+        System.out.println(lista.contar());
     }
+
+}
