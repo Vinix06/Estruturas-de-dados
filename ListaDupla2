@@ -1,9 +1,9 @@
 public class ListaDupla2 {
-    public class ListaDupla {
+    
     private NoDuplo primeiro;
     private NoDuplo ultimo;
 
-    public ListaDupla() {
+    public ListaDupla2() {
         this.primeiro = null;
         this.ultimo = null;
     }
@@ -74,4 +74,6 @@ public class ListaDupla2 {
     }  
     
     }
-}
+
+
+    
