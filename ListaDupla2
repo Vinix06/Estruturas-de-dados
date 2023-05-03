@@ -1,0 +1,77 @@
+public class ListaDupla2 {
+    public class ListaDupla {
+    private NoDuplo primeiro;
+    private NoDuplo ultimo;
+
+    public ListaDupla() {
+        this.primeiro = null;
+        this.ultimo = null;
+    }
+
+    public boolean vazia() {
+        return primeiro == null;
+    }
+
+    public void insereInicio(Aluno aluno) {
+        NoDuplo novo = new NoDuplo(aluno);
+        if (vazia()) {
+            ultimo = novo;
+        } else {
+            primeiro.setAnterior(novo);
+        }
+        novo.setProximo(primeiro);
+        primeiro = novo;
+    }
+
+    public void insereFim(Aluno aluno) {
+        NoDuplo novo = new NoDuplo(aluno);
+        if (vazia()) {
+            primeiro = novo;
+        } else {
+            ultimo.setProximo(novo);
+            novo.setAnterior(ultimo);
+        }
+        ultimo = novo;
+    }
+
+    public Aluno removeInicio() {
+        if (vazia()) {
+            System.out.println("Lista vazia!");
+            return null;
+        } else {
+            Aluno temp = primeiro.getAluno();
+            if (primeiro == ultimo) {
+                ultimo = null;
+            } else {
+                primeiro.getProximo().setAnterior(null);
+            }
+            primeiro = primeiro.getProximo();
+            return temp;
+        }
+    }
+
+    public Aluno removeFim() {
+        if (vazia()) {
+            System.out.println("Lista vazia!");
+            return null;
+        } else {
+            Aluno temp = ultimo.getAluno();
+            if (primeiro == ultimo) {
+                primeiro = null;
+            } else {
+                ultimo.getAnterior().setProximo(null);
+            }
+            ultimo = ultimo.getAnterior();
+            return temp;
+        }
+    }
+
+    public void exibe() {
+        if (vazia()) {
+            
+
+}
+    }  
+    
+    }
+}
