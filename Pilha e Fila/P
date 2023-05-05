@@ -1,0 +1,25 @@
+public class Pilha {
+
+    private Lista lista;
+
+    public Pilha() {
+        lista = new Lista();
+    }
+
+    public void push(Object objeto) {
+        lista.inserir(objeto);
+    }
+
+    public Object pop() {
+        Elemento ultimo = lista.remover(lista.contar() - 1);
+        return ultimo.getObjeto();
+    }
+
+    public boolean vazia() {
+        return lista.contar() == 0;
+    }
+
+    public int tamanho() {
+        return lista.contar();
+    }
+}
