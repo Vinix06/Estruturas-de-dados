@@ -1,0 +1,25 @@
+public class Fila {
+
+    private Lista lista;
+
+    public Fila() {
+        lista = new Lista();
+    }
+
+    public void enfileirar(Object objeto) {
+        lista.inserir(objeto);
+    }
+
+    public Object desenfileirar() {
+        Elemento primeiro = lista.remover(0);
+        return primeiro.getObjeto();
+    }
+
+    public boolean vazia() {
+        return lista.contar() == 0;
+    }
+
+    public int tamanho() {
+        return lista.contar();
+    }
+}
