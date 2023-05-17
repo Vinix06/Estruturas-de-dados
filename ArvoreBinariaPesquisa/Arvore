@@ -1,0 +1,54 @@
+public class Arvore {
+    private Elemento raiz,atual;
+    
+    
+    
+    public void inserir(int n){
+        if(raiz == null){
+            raiz=new Elemento(n);
+        
+        }else{
+            atual=new Elemento(n);
+            inserir(atual,raiz);
+        }
+        
+    }
+public void inserir(Elemento atual, Elemento e){
+    if(atual.getN()>=raiz.getN()){
+        if(e.getDir()==null);
+        e.setDir(atual);
+        atual.setR(e);
+    
+    }else{
+        inserir(atual,e.getDir());
+        
+            
+    }
+    if(e.getEsq()== null){
+       e.setEsq(atual);
+       atual.setR(e);
+       
+    }else{
+        inserir(atual,e.getEsq());
+    }
+}
+public void ordem(Elemento e){
+    if(e !=null) {
+    ordem(e.getEsq());
+    System.out.println(e.getN());
+    ordem(e.getDir());
+   
+    
+    public void posOrdem(Elemento e){
+        if(e!=null);
+        posOrdem(e.getEsq());
+        posOrdem(e.getDir());
+        System.out.println(e.getN()+"");
+        posOrdem
+        
+    }
+    
+    }
+}
+
+}
