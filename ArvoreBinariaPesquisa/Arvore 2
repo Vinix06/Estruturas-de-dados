@@ -1,0 +1,170 @@
+public class Arvore {
+    
+    private Elemento raiz, atual;
+    
+    public Elemento getRaiz() {
+        return raiz;
+    }
+    
+    public void inserir(int n) {
+        if (raiz == null) {
+            raiz = new Elemento(n);
+        } else {
+            atual = new Elemento(n);
+            inserir(atual, raiz);
+        }
+    }
+    
+    public void inserir(Elemento atual, Elemento e) {
+        if (atual.getN() >= e.getN()) {
+            if (e.getDir() == null) {
+                e.setDir(atual);
+                atual.setR(e);
+            } else {
+                inserir(atual, e.getDir());
+            }
+        } else {
+            if (e.getEsq() == null) {
+                e.setEsq(atual);
+                atual.setR(e);
+            } else {
+                inserir(atual, e.getEsq());
+            }
+        }
+    }
+    
+    public boolean pesquisar(Elemento e, int n) {
+        if (e != null) {
+            if (n == e.getN()) {
+                System.out.print(e.getN() + "\t");
+                return true;
+            } else if (n > e.getN()) {
+                System.out.print(e.getN() + "\t");
+                return pesquisar(e.getDir(), n);
+            } else {
+                System.out.print(e.getN() + "\t");
+                return pesquisar(e.getEsq(), n);
+            }
+        }
+        System.out.println("\n| Não foi possível encontrar o valor: " + n);
+        return false;
+    }
+    
+    public Elemento pesquisar(int n, Elemento e) {
+        if (e != null) {
+            if (n == e.getN()) {
+                return e;
+            } else if (n > e.getN()) {
+                return pesquisar(n, e.getDir());
+            } else {
+                return pesquisar(n, e.getEsq());
+            }
+        }
+        return null;
+    }
+    
+    public int maiorValor(Elemento e) {
+        if (e.getDir() != null) {
+            return maiorValor(e.getDir());
+        }
+        return e.getN();
+    }
+    
+    public int menorValor(Elemento e) {
+        if (e.getEsq() != null) {
+            return maiorValor(e.getEsq());
+        }
+        return e.getN();
+    }
+    
+    public int grau(Elemento e, int n) {
+        Elemento pesq = pesquisar(n, e);
+        if (pesq != null) {
+            if (pesq.getDir() == null && pesq.getEsq() == null) {
+                return 0;
+            }
+            if (pesq.getDir() != null && pesq.getEsq() != null) {
+                return 2;
+            } else {
+                return 1;
+            }
+        }
+        return -1;
+    }
+    
+    public Elemento getMaior(Elemento e) {
+        if (e.getDir() != null) {
+            return getMaior(e.getDir());
+        }
+        return e;
+    }
+    
+    public void remover(Elemento e, int n) {
+        Elemento pesq = pesquisar(n, e);
+        if (pesq != null) {
+            if (grau(e, n) == 0) {
+                if (pesq.getR().getDir() == pesq) {
+                    pesq.getR().setDir(null);
+                    pesq.setR(null);
+                } else {
+                    pesq.getR().setEsq(null);
+                    pesq.setR(null);
+                }
+            } else if (grau(e, n) == 1) {
+                if (pesq.getDir() != null) {
+                    pesq.setN(pesq.getDir().getN());
+                    remover(pesq.getDir(), pesq.getDir().getN());
+                } else {
+                    pesq.setN(pesq.getEsq().getN());
+                    remover(pesq.getEsq(), pesq.getEsq().getN());
+                }
+            } else {
+                Elemento maior = getMaior(pesq.getEsq());
+                pesq.setN(maior.getN());
+                remover(pesq.getEsq(), maior.getN());
+            }
+        }
+    }
+    
+    /**
+     * 1) Percorrer subárvore esquerda
+     * 2) Visitar nó raiz
+     * 3) Percorrer subárvore direita
+     * @param e 
+     */
+    public void ordem(Elemento e) {
+        if (e != null) {
+            ordem(e.getEsq());
+            System.out.print(e.getN() + "\t");
+            ordem(e.getDir());
+        }
+    }
+    
+    /**
+     * 1) Percorrer subárvore esquerda
+     * 2) Percorrer subárvore direita
+     * 3) Visitar nó raiz
+     * @param e 
+     */
+    public void pos(Elemento e) {
+        if (e != null) {
+            pos(e.getEsq());
+            pos(e.getDir());
+            System.out.print(e.getN() + "\t");
+        }
+    }
+    
+    /**
+     * 1) Visitar nó raiz
+     * 2) Percorrer subárvore esquerda
+     * 3) Percorrer subárvore direita
+     * @param e 
+     */
+    public void pre(Elemento e) {
+        if (e != null) {
+            System.out.print(e.getN() + "\t");
+            pos(e.getEsq());
+            pos(e.getDir());
+        }
+    }
+}
